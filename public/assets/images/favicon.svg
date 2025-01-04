@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#000" stroke="#FFD700" stroke-width="4" />
+
+  <!-- Green Leaf Shape -->
+  <path d="M100 50 Q120 70 100 90 Q80 70 100 50" fill="#008000" />
+
+  <!-- Golden Accent -->
+  <circle cx="100" cy="100" r="10" fill="#FFD700" />
+
+  <!-- Elegant Line -->
+  <line x1="50" y1="150" x2="150" y2="150" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Text -->
+  <text x="100" y="180" fill="#FFD700" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">GoldenLeaf</text>
+</svg>
