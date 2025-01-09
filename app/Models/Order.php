@@ -14,7 +14,7 @@ class Order extends Model
 
     protected $fillable=
     [
-    'store_id','user_id','payment_method','status','paymemt_status'
+        'store_id','user_id','payment_method','status','paymemt_status'
     ];
     public function scopeFilter(Builder $builder,$filters)
     {
@@ -24,6 +24,13 @@ class Order extends Model
                 if($filters['status']?? false){
                 $builder->where('products.status',$filters['status']);
        }
+    }
+    protected static function booted()
+    {
+        static::creating(function(Order $order)
+        {
+         $order->number=Order::getNextOrderNumber();
+        });
     }
     public  function store()
     {
@@ -58,13 +65,7 @@ class Order extends Model
        return $this->hasOne(OrderAddress::class,'order_id','id')
        ->where('type','=','shipping');
     }
-    protected static function booted()
-    {
-        static::creating(function(Order $order)
-        {
-         $order->number=Order::getNextOrderNumber();
-        });
-    }
+
     public static function getNextOrderNumber()
     {
         $year=Carbon::now()->year;

@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
             if ($e->getCode() === '23000') {
                 Log::channel('sql')->warning($e->getMessage());
                 return false;
-            }
+            } 
 
             return true;
         });

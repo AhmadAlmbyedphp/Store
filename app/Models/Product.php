@@ -14,20 +14,53 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = [
+    protected $fillable =
+    [
        'name','slug','description','image','category_id','store_id',
        'price','compare_price','status',
     ];
      // local scope
-     public function scopeFilter(Builder $builder,$filters)
-     {
+    public function scopeFilter(Builder $builder,$filters)
+        {
         if($filters['name']?? false){
             $builder->where('products.name','LIKE',"%{$filters['name']}%");
-                }
-                 if($filters['status']?? false){
-                 $builder->where('products.status',$filters['status']);
         }
-     }
+        if($filters['status']?? false){
+        $builder->where('products.status',$filters['status']);
+        }
+    }
+    public function scopeOption(Builder $builder,$filters)
+    {
+        $options = array_merge([
+            'status' => 'active',
+            'store_id' => null,
+            'category_id' => null,
+            'tag_id' => null,
+        ], $filters);
+
+        $builder->when($options['status'], function ($query, $status) {
+            return $query->where('status', $status);
+        });
+        $builder->when($options['store_id'], function($builder, $value) {
+            $builder->where('store_id', $value);
+        });
+        $builder->when($options['category_id'], function($builder, $value) {
+            $builder->where('category_id', $value);
+        });
+        $builder->when($options['tag_id'], function($builder, $value) {
+
+            $builder->whereExists(function($query) use ($value) {
+                $query->select(1)
+                    ->from('product_tag')
+                    ->whereRaw('product_id = products.id')
+                    ->where('tag_id', $value);
+            });
+        });
+    }
+    public function scopeActive(Builder $builder)
+    {
+        $builder->where('status', '=', 'active');
+    }
      protected static  function booted()
      {
         static::addGlobalScope('store',function(Builder $builder){
@@ -37,8 +70,6 @@ class Product extends Model
             }
         });
      }
-
-
      public function category()
      {
            return $this->belongsTo(Category::class);
@@ -47,14 +78,10 @@ class Product extends Model
      {
            return $this->belongsTo(Store::class);
      }
-     public function tags(){
+     public function tags()
+     {
       return $this->belongsToMany(Tag::class,);
      }
-     protected function scopeActive(Builder $builder)
-     {
-      $builder->where('status','=','active');
-     }
-
      public function getImageUrlAttribute()
      {
        if(!$this->image){
@@ -65,7 +92,6 @@ class Product extends Model
        }
       return asset('storage/'.$this->image);
     }
-
     public function getSalePercentAttribute()
     {
       if(!$this->compare_price){
@@ -73,8 +99,6 @@ class Product extends Model
       }
       return round(100-(100 * $this->price/ $this->compare_price),1) ;
     }
-
-
     public static function rules($id = 0)
     {
        return[

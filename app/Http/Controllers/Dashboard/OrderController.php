@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -21,19 +22,14 @@ class OrderController extends Controller
     public function index()
     {
         Gate::authorize('order.view');
-        $request= request();
+        $request = request();
         $user = Auth::user();
-        // if($user === Schema::hasTable('admins'))
-        // {
-        //    $orders = Order::all();
-        // }else{
-            $orders = Order::where('user_id','=',$user->id)
-                        ->with(['products','user','addresses'])
-                        ->filter($request->query())
-                        ->paginate(5);
-        // }
+            $orders = Order::where('user_id', '=', $user->id)
+                ->with(['products', 'user', 'addresses'])
+                ->filter($request->query())
+                ->paginate(5);
 
-       return view('dashboard.orders.index',compact('orders'));
+        return view('dashboard.orders.index', compact('orders'));
     }
 
     /**
@@ -45,19 +41,19 @@ class OrderController extends Controller
     public function show($id)
     {
         Gate::authorize('order.view');
-        $request= request();
+        $request = request();
         $order = Order::findOrFail($id)
-                ->with(['products','user','addresses'])
-                ->filter($request->query());
-        $orderItem = OrderItem::where('order_id','=',$order)
-                    ->with(['product','order']);
-        return view('dashboard.orders.show',
-        [
-            'order'=>$order,
-            'orderItem'=>$orderItem
-        ]);
-
-
+            ->with(['products', 'user', 'addresses'])
+            ->filter($request->query());
+        $orderItem = OrderItem::where('order_id', '=', $order)
+            ->with(['product', 'order']);
+        return view(
+            'dashboard.orders.show',
+            [
+                'order' => $order,
+                'orderItem' => $orderItem
+            ]
+        );
     }
 
     /**
@@ -69,35 +65,36 @@ class OrderController extends Controller
     public function destroy($id)
     {
         Gate::authorize('order.delete');
-        
-        $order =Order::findOrFail($id);
+
+        $order = Order::findOrFail($id);
         $order->delete();
-        $seved= $order;
-        if($seved){
-            session()->flash('success','order delete scssesfuly');
+        $seved = $order;
+        if ($seved) {
+            session()->flash('success', 'order delete scssesfuly');
             return redirect()->route('dashboard.orders.index');
         }
     }
 
-    public function trash(){
-        Gate::authorize('order.view');
-        $orders=Order::onlyTrashed()->paginate();
-        return view('dashboard.orders.trash',compact('orders'));
-    }
-    public function restore(Request $request,$id)
+    public function trash()
     {
         Gate::authorize('order.view');
-        $order=Order::onlyTrashed()->findOrFail($id);
+        $orders = Order::onlyTrashed()->paginate();
+        return view('dashboard.orders.trash', compact('orders'));
+    }
+    public function restore(Request $request, $id)
+    {
+        Gate::authorize('order.view');
+        $order = Order::onlyTrashed()->findOrFail($id);
         $order->restore();
         return redirect()->route('dashboard.orders.trash')
-        ->with('success','order restoreed! ');
+            ->with('success', 'order restoreed! ');
     }
     public function forceDelete($id)
     {
         Gate::authorize('order.view');
-        $order=Order::onlyTrashed()->findOrFail($id);
+        $order = Order::onlyTrashed()->findOrFail($id);
         $order->forceDelete();
         return redirect()->route('dashboard.orders.trash')
-        ->with('success','order delete scssesfuly!');
+            ->with('success', 'order delete scssesfuly!');
     }
 }
