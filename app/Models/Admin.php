@@ -15,10 +15,6 @@ class Admin extends User
     [
         'name','email','username','password','phone_number','super_admin','status',
     ];
-    public function roles()
-    {
-        return $this->morphToMany(Role::class,'users','role_user');
-    }
     public function scopeFilter(Builder $builder,$filters)
     {
         if($filters['name']?? false)
@@ -29,5 +25,9 @@ class Admin extends User
         {
             $builder->where('admins.status',$filters['status']);
         }
+    }
+    public function isAdmin()
+    {
+        return $this->super_admin === 1;
     }
 }

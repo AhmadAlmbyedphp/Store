@@ -7,10 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -24,13 +21,21 @@ class OrderController extends Controller
         Gate::authorize('order.view');
         $request = request();
         $user = Auth::user();
+
+        if ($user->isAdmin()) {
+            $orders = Order::with(['products', 'user', 'addresses'])
+                ->filter($request->query())
+                ->paginate(5);
+        } else {
             $orders = Order::where('user_id', '=', $user->id)
                 ->with(['products', 'user', 'addresses'])
                 ->filter($request->query())
                 ->paginate(5);
+        }
 
         return view('dashboard.orders.index', compact('orders'));
     }
+
 
     /**
      * Display the specified resource.

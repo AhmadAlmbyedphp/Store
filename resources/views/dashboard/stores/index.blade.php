@@ -44,7 +44,7 @@
                             <td>{{$store->id}}</td>
                             <td>{{$store->name}}</td>
                             <td><img style="width: 60px ; height:60px ;"
-                                src="{{Storage::url($store->iogo_image)}}" alt="">
+                                src="{{Storage::url($store->logo_image)}}" alt="">
                             </td>
                             <td><img style="width: 60px ; height:60px ;"
                                 src="{{Storage::url($store->cover_image)}}" alt="">

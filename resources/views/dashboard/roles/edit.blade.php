@@ -10,7 +10,6 @@
         enctype="multipart/form-data">
        @method('PUT')
         @csrf
-
         @if($errors->any())
         <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert"
@@ -35,24 +34,18 @@
                  {{$ability_name}}
                 </div>
                 <div class="col-md-2">
-                   <input type="radio" name="abilities[{{$ability_code}}]" value = "allow"
-                     @if ($role_abilities[$ability_code] == 'allow' ) checked  @endif
-                     @checked(($role_abilities[$ability_code] ?? '') == 'allow')
-                   >
+                    <input type="radio" name="abilities[{{ $ability_code }}]" value="allow"
+                    @if(($role_abilities[$ability_code] ?? '') === 'allow') checked @endif>
                    Allow
                 </div>
                 <div class="col-md-2">
-                    <input type="radio" name="abilities[{{$ability_code}}]" value = "deny"
-                    @if ($role_abilities[$ability_code] == 'deny' )checked  @endif
-                    @checked(($role_abilities[$ability_code] ?? '') == 'deny')
-                    >
+                    <input type="radio" name="abilities[{{ $ability_code }}]" value="deny"
+                    @if(($role_abilities[$ability_code] ?? '') === 'deny') checked @endif>
                     Deny
                 </div>
                 <div class="col-md-2">
-                    <input type="radio" name="abilities[{{$ability_code}}]" value = "inherit"
-                      @if ($role_abilities[$ability_code] == 'inherit' )checked  @endif
-                    @checked(($role_abilities[$ability_code] ?? '') == 'inherit')
-                    >
+                    <input type="radio" name="abilities[{{ $ability_code }}]" value="inherit"
+                    @if(($role_abilities[$ability_code] ?? '') === 'inherit') checked @endif>
                     Inherit
                 </div>
             </div>

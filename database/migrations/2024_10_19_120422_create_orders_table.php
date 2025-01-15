@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->float('tax')->default(0);
             $table->float('discount')->default(0);
             $table->float('total')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

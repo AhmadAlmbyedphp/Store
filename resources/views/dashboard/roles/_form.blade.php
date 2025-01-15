@@ -24,21 +24,21 @@
                 </div>
                 <div class="col-md-2">
                    <input type="radio" name="abilities[{{$ability_code}}]" value = "allow"
-                   @if ($role_abilities[$ability_code] == 'allow' ) checked  @endif
+                   @if ($role_abilities[$ability_code]    == 'allow') checked  @endif
                    {{-- @checked(($role_abilities[$ability_code] ?? '') == 'allow') --}}
                    >
                    Allow
                 </div>
                 <div class="col-md-2">
                     <input type="radio" name="abilities[{{$ability_code}}]" value = "deny"
-                    @if ($role_abilities[$ability_code] == 'deny' )checked  @endif
+                    @if ($role_abilities[$ability_code]   == 'deny') checked  @endif
                     {{-- @checked(($role_abilities[$ability_code] ?? '') == 'deny') --}}
                     >
                     Deny
                 </div>
                 <div class="col-md-2">
                     <input type="radio" name="abilities[{{$ability_code}}]" value = "inherit"
-                    @if ($role_abilities[$ability_code] == 'inherit' )checked  @endif
+                    @if ($role_abilities[$ability_code]  == 'inherit') checked  @endif
                     {{-- @checked(($role_abilities[$ability_code] ?? '') == 'inherit') --}}
                     >
                     Inherit

@@ -16,11 +16,11 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); 
-            $table->string('slug')->unique(); 
-            $table->text('description')->nullable(); 
-            $table->string('iogo_image')->nullable(); 
-            $table->string('cover_image')->nullable(); 
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->string('logo_image')->nullable();
+            $table->string('cover_image')->nullable();
             $table->enum('status',['active','inactive'])
                   ->default('active');
             $table->timestamps();
@@ -28,7 +28,7 @@ class CreateStoresTable extends Migration
     }
 
     /**
-     * Reverse the migrations.  
+     * Reverse the migrations.
      *
      * @return void
      */

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTypeColumnToUsersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class AddTypeColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('type',['user','admin','super-admin'])
-            ->default('user')
-            ->after('phone_number');
-
+            $table->foreignId('store_id')->nullable()
+                ->after('phone_number')
+                ->constrained('stores')
+                ->nullOnDelete();
         });
     }
 
@@ -29,7 +29,7 @@ class AddTypeColumnToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('type');
+            $table->dropConstrainedForeignId('store_id');
         });
     }
-}
+};

@@ -49,4 +49,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Profile::class,'user_id','id')
         ->withDefault();
     }
+    public function isAdmin()
+    {
+        return $this->type === 'admin||super-admin';
+    }
+
 }

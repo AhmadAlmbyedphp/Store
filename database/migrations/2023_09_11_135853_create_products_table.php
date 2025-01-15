@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
         $table->string('image')->nullable();
         $table->float('price')->default(0);
         $table->float('compare_price')->nullable();
+        $table->unsignedBigInteger('quantity')->default(100);
         $table->json('options')->nullable();
         $table->float('rating')->default(0);
         $table->boolean('featured')->default(0);

@@ -34,7 +34,7 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        Gate::authorize('admin.create');
+         Gate::authorize('admin.create');
             return view('dashboard.admins.create',[
                 'roles' => Role::all(),
                 'admin' => new Admin(),
@@ -49,7 +49,7 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('admin.create');
+         Gate::authorize('admin.create');
         $request->validate([
            'name' => 'required|string|max:255',
            'roles' => 'required|array',
@@ -81,7 +81,7 @@ class AdminsController extends Controller
      */
     public function edit(Admin $admin)
     {
-        Gate::authorize('admin.update');
+         Gate::authorize('admin.update');
         $roles = Role::all();
 
         $admin_roles = $admin->roles()->pluck('id')->toArray();
@@ -99,7 +99,7 @@ class AdminsController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-        Gate::authorize('admin.update');
+         Gate::authorize('admin.update');
         $request->validate([
             'name' => 'required|string|max:255',
             'roles' => 'required|array',
@@ -121,7 +121,7 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('admin.delete');
+         Gate::authorize('admin.delete');
        Admin::destroy($id);
        return redirect()
        ->route('dashboard.admins.index')

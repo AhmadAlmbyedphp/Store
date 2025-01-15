@@ -9,10 +9,10 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title mt-2">roles Table</h3>
-            @can('roles.create')
+            {{-- @can('roles.create') --}}
             <a href="{{route('dashboard.roles.create')}}"
             class="btn btn-success float-right mr-2">create</a>
-            @endcan
+            {{-- @endcan --}}
           </div>
      <div class="card-body">
         <x-alert  type="success"/>

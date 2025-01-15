@@ -54,8 +54,8 @@ class StoresController extends Controller
         $request->merge([
             'slug'=>Str::slug($request->post('name'))
         ]);
-        $data=$request->except('cover_image'&'iogo_image');
-        $data['iogo_image']= $this->uploadImgaeLogo($request);
+        $data=$request->except('cover_image'&'logo_image');
+        $data['logo_image']= $this->uploadImgaeLogo($request);
         $data['cover_image']= $this->uploadImgaeCover($request);
         $store = Store::create($data);
         $seved= $store->save();
@@ -109,13 +109,13 @@ class StoresController extends Controller
             'slug'=>Str::slug($request->post('name'))
         ]);
         $old_imagecover=$store->cover_image;
-        $old_imageiogo=$store->iogo_image;
-        $data=$request->except('cover_image','iogo_image');
+        $logo_image=$store->logo_image;
+        $data=$request->except('cover_image','logo_image');
         $new_cover=$this->uploadImgaeCover($request);
         $new_iogo=$this->uploadImgaeLogo($request);
        if($new_cover && $new_iogo){
         $data['cover_image']=$new_cover;
-        $data['iogo_image']=$new_iogo;
+        $data['logo_image']=$new_iogo;
        }
        $store->update($data);
 
@@ -144,11 +144,11 @@ class StoresController extends Controller
     protected function uploadImgaeLogo(Request $request)
     {
 
-        if(!$request->hasFile('iogo_image')){
+        if(!$request->hasFile('logo_image')){
             return ;
         }
-            $file=$request->file('iogo_image');
-            $path=$file->store('uploads_store/uploads_iogo_store',[
+            $file=$request->file('logo_image');
+            $path=$file->store('uploads_store/uploads_logo_image',[
                 'disk'=>'public'
             ]);
             return $path;

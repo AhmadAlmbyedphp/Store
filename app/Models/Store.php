@@ -12,7 +12,7 @@ class Store extends Model
     use HasFactory ,Notifiable;
 
     protected $fillable = [
-     'name','slug','description','iogo_image','cover_image','status'
+     'name','slug','description','logo_image','cover_image','status'
       ];
 
 
@@ -41,7 +41,7 @@ class Store extends Model
              'description'=>[
                 'required','string','min:20','max:5000',
              ],
-             'iogo_image'=>[
+             'logo_image'=>[
                      'image','mimes:jpg,png','max:1048576',
                      'dimensions:min_width=100,min_height=100'
              ],

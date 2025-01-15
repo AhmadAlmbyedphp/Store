@@ -8,11 +8,11 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            @can('user.create')
+            {{-- @can('user.create') --}}
                 <h3 class="card-title mt-2">users Table</h3>
                 <a href="{{route('dashboard.users.create')}}"
                 class="btn btn-success float-right mr-2">create</a>
-            @endcan
+            {{-- @endcan --}}
           </div>
      <div class="card-body">
         <x-alert  type="success"/>

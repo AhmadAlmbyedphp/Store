@@ -1,4 +1,4 @@
-  
+
    @if($errors->any())
         <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert"
@@ -14,52 +14,52 @@
     <div class="form-group">
         <x-form.input label="store Name"
         name="name" :value="$store->name"/>
-    </div> 
+    </div>
     {{-- descripition--}}
     <div class="form-group">
-        <x-form.textarea  label="store Description" 
+        <x-form.textarea  label="store Description"
         name="description" :value="$store->description"/>
     </div>
     {{-- iogo_image --}}
     <div class="form-group">
         <label for="exampleInputFile">store iogo</label>
         <div class="input-group">
-        <div class="custom-file"> 
-        <input name="iogo_image" accept="image/*"
-            type="file" class="custom-file-input" id="exampleInputFile">    
+        <div class="custom-file">
+        <input name="logo_image" accept="image/*"
+            type="file" class="custom-file-input" id="exampleInputFile">
         <label class="custom-file-label" for="exampleInputFile">store iogo
-        </div>  
+        </div>
         <div  class="input-group-append">
         <span class="input-group-text">Upload</span>
         </div>
         </div>
-        @if($store->iogo_image)
+        @if($store->logo_image)
         <img style="width: 60px ; height:60px ;"
-        src="{{Storage::url($store->iogo_image)}}" alt="">                
+        src="{{Storage::url($store->logo_image)}}" alt="">
         @endif
     </div>
     {{-- cover_image --}}
     <div class="form-group">
         <label for="exampleInputFile">store Image</label>
         <div class="input-group">
-        <div class="custom-file"> 
+        <div class="custom-file">
         <input name="cover_image" accept="image/*"
-            type="file" class="custom-file-input" id="exampleInputFile">    
+            type="file" class="custom-file-input" id="exampleInputFile">
         <label class="custom-file-label" for="exampleInputFile">store Image</label>
-        </div>  
+        </div>
         <div  class="input-group-append">
         <span class="input-group-text">Upload</span>
         </div>
         </div>
-        @if($store->cover_image) 
+        @if($store->cover_image)
         <img style="width: 60px ; height:60px ;"
-        src="{{Storage::url($store->cover_image)}}" alt="">                
+        src="{{Storage::url($store->cover_image)}}" alt="">
         @endif
     </div>
     {{-- status --}}
     <div class="form-group">
-      <label>Status</label>  
-      <x-form.radio name="status" :checked="$store->status" 
+      <label>Status</label>
+      <x-form.radio name="status" :checked="$store->status"
         :options="['active' => 'Active', 'archived' => 'Archived']"/>
     </div>
 </div>
