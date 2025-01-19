@@ -79,7 +79,7 @@
 
             setLoading(false);
         }
-        
+
         // ------- UI helpers -------
 
         function showMessage(messageText) {

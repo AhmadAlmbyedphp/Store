@@ -7,14 +7,15 @@ use App\Http\Controllers\Front\ProdcutsControllert;
 use App\Http\Controllers\Front\PaymentsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/products',[ProdcutsControllert::class,'index'])
-    ->name('products.index');
+// Route::get('/products',[ProdcutsControllert::class,'index'])
+//     ->name('products.index');
+Route::resource('/products',ProdcutsControllert::class);
 
 Route::get('/products/{product:slug}',[ProdcutsControllert::class,'shew'])
       ->name('products.shew');
+Route::view('404.front','front.404',)->name('front.404');
 
 Route::resource('cart', CartController::class);
-
 Route::get('checkout',[CheckoutController::class,'create'])->name('checkout');
 Route::post('checkout',[CheckoutController::class,'store']);
 

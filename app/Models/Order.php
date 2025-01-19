@@ -51,7 +51,10 @@ class Order extends Model
             'product_name','price','quantity','options',
         ]);
     }
-
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
     public function addresses()
     {
         return $this->hasOne(OrderAddress::class);

@@ -116,8 +116,6 @@ class ProductsController extends Controller
             'name.unique'=>'This is name already exists'
         ]);
         $product->update( $request->except('tags') );
-
-
         $tags = json_decode($request->post('tags'));
         $tag_ids = [];
 

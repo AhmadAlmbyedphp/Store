@@ -1,5 +1,5 @@
 <x-front-layout title="Register">
-    <x-slot:breadcrumb>
+    <x-slot name="breadcrumb">
         <!-- Start Breadcrumbs -->
         <div class="breadcrumbs">
             <div class="container">
@@ -19,8 +19,7 @@
             </div>
         </div>
         <!-- End Breadcrumbs -->
-    </x-slot:breadcrumb>
-
+    </x-slot>
     <!-- Start Account Register Area -->
     <div class="account-login section">
         <div class="container">
