@@ -85,8 +85,8 @@ class CheckoutController extends Controller
         }
 
         // Redirect the user to the 'home' route upon success
-        return redirect()->route('home');
-       // return redirect()->route('orders.payments.create', $order->id);
+       // return redirect()->route('home');
+       return redirect()->route('orders.payments.create', $order->id);
     }
 
 }

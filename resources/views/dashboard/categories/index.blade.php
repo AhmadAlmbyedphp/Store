@@ -47,8 +47,7 @@
                         <tr>
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
-                            <td><img style="width: 60px ; height:60px ;"
-                                src="{{Storage::url($category->image)}}" alt="">
+                            <td>
                             </td>
                             <td>{{$category->parent->name}}</td>
                             <td>{{$category->products_count}}</td>

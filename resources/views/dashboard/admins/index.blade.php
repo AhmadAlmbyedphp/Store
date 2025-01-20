@@ -43,7 +43,11 @@
                         <tr>
                             <td>{{$admin->id}}</td>
                             <td>{{$admin->name}}</td>
-                            <td></td>
+                            <td>
+                                @foreach($admin->roles as $role)
+                                    <p>{{ $role->name }}</p>
+                                @endforeach
+                            </td>
                             <td>{{$admin->status}}</td>
                             <td>{{$admin->created_at}}</td>
                             <td>

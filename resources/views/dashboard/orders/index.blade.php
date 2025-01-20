@@ -1,3 +1,4 @@
+
 @extends('layouts.dashboard')
 @section('title','order')
 @section('braedceumd')
@@ -27,7 +28,8 @@
        <table class="table">
             <thead>
                     <tr>
-                        <th>store_id</th>
+                        <th style="width: 10px">ID</th>
+                        <th>store_id</th> 
                         <th>user_name</th>
                         <th >payment_method</th>
                         <th >paymemt_status</th>
@@ -37,6 +39,7 @@
             <tbody>
                     @forelse ( $orders as $order )
                         <tr>
+                            <td>{{$order->id}}</td>
                             <td>{{$order->store_id}}</td>
                             <td>{{$order->user->name}}</td>
                             <td>{{$order->payment_method}}</td>

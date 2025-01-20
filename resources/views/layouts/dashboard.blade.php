@@ -147,10 +147,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @if ( Auth::check())
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            {{-- @if ()
-            <img style="width: 60px ; height:60px ;"
-            src="{{Storage::url(Auth::user()->profile->image)}}" alt="">
-            @endif --}}
+            @if (Auth::guard('web')->check())
+            <img style="width: 60px; height: 60px;"
+                 src="{{ Storage::url(Auth::guard('web')->user()->profile->image) }}" alt="">
+            @endif
           </div>
           <div class="info">
             <a  class="d-block">{{ Auth::user()->name }}</a>

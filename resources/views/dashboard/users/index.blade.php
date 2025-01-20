@@ -33,6 +33,7 @@
                         <th style="width: 10px">ID</th>
                         <th>Name</th>
                         <th>Role</th>
+                        <th>image</th>
                         <th >status</th>
                         <th >Create At</th>
                     </tr>
@@ -43,7 +44,15 @@
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
-                            <td></td>
+                            <td>
+                                @foreach($user->roles as $role)
+                                    <p>{{ $role->name }}</p>
+                                @endforeach
+                            </td>
+                            <th>
+                                <img style="width: 60px ; height:60px ;"
+                                src="{{Storage::url($user->profile->image)}}" alt="">
+                            </th>
                             <td>{{$user->status}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>
