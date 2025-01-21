@@ -28,7 +28,6 @@
     </div>
     <fieldset>
         <legend> Roles </legend>
-
         @foreach ($roles as $role)
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->id }}"

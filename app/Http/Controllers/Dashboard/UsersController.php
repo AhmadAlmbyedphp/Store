@@ -78,9 +78,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-
         $user_roles = $user->roles()->pluck('id')->toArray();
-
         return view('dashboard.users.edit',compact('user','roles','user_roles'));
     }
 

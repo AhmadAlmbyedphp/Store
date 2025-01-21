@@ -34,7 +34,7 @@
                         <th>Name</th>
                         <th>Role</th>
                         <th>image</th>
-                        <th >status</th>
+                        <th >type</th>
                         <th >Create At</th>
                     </tr>
             </thead>
@@ -53,7 +53,7 @@
                                 <img style="width: 60px ; height:60px ;"
                                 src="{{Storage::url($user->profile->image)}}" alt="">
                             </th>
-                            <td>{{$user->status}}</td>
+                            <td>{{$user->type}}</td>
                             <td>{{$user->created_at}}</td>
                             <td>
                                 <div class="btn-group">
